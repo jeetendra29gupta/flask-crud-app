@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %} {{header}} {% endblock %}
+
+{% block content %}
+
+{% include 'header.html' %}
+{% include 'menu.html' %}
+{% include 'message.html' %}
+
+<main style="width: 100vw; height: calc(100vh - 279px); overflow-y: scroll;">
+    <table class="w3-table-all w3-hoverable" id="students_table">
+        <thead>
+        <tr class="w3-light-grey">
+            <th><strong>Full Name</strong></th>
+            <th><strong>Address</strong></th>
+            <th><strong>Action</strong></th>
+        </tr>
+        </thead>
+        {% for student in students_list %}
+        <tr>
+            <td>{{ student["full_name"] }}</td>
+            <td>{{ student["address"] }}</td>
+            <td>
+                <strong>
+                    <a href="{{ url_for('student.edit_student', roll_number=student['roll_number']) }}"
+                       class="w3-button">
+                        ✏️Edit
+                    </a>
+                </strong>
+                <strong>
+                    <a href="{{ url_for('student.delete_student', roll_number=student['roll_number']) }}"
+                       class="w3-button">
+                        ❌Delete
+                    </a>
+                </strong>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <div class="w3-panel w3-section w3-row-padding w3-stretch" style="width:60%; margin: 0 auto;">
+
+        <div class="w3-third w3-container w3-center">
+            {% if current_page > 1 %}
+            <a class="w3-button w3-round" href="{{ url_for('student.students', page=current_page - 1) }}">Previous</a>
+            {% else %}
+            <span class="w3-button w3-disabled">Previous</span>
+            {% endif %}
+        </div>
+        <div class="w3-third w3-container">
+            <span class="w3-button w3-disabled" style="cursor: none;pointer-events: none;">Page {{ current_page }} of {{ total_pages }}</span>
+        </div>
+        <div class="w3-third w3-container">
+            {% if current_page < total_pages %}
+            <a class="w3-button w3-round" href="{{ url_for('student.students', page=current_page + 1) }}">Next</a>
+            {% else %}
+            <span class="w3-button w3-disabled">Next</span>
+            {% endif %}
+        </div>
+    </div>
+</main>
+
+{% include 'footer.html' %}
+
+{% endblock %}

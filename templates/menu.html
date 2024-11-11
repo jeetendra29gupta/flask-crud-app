@@ -1,0 +1,55 @@
+<div class="w3-bar w3-light-grey w3-round w3-card w3-border w3-section">
+    <a href="{{ url_for('student.students') }}" class="w3-bar-item w3-button"><strong>🏠Student</strong></a>
+    <a href="{{ url_for('student.add_student') }}" class="w3-bar-item w3-button"><strong>➕Add New Student</strong></a>
+    <input type="text" class="w3-bar-item w3-input w3-right" placeholder="Search by Address.. &#128269; "
+           onkeyup="search_by_address()" id="search_by_address">
+    <span class="w3-bar-item w3-right"><strong>&nbsp; OR &nbsp;</strong></span>
+    <input type="text" class="w3-bar-item w3-input w3-right" placeholder="Search by Name.. &#128270;"
+           onkeyup="search_by_name()" id="search_by_name">
+</div>
+
+<script>
+    function search_by_name() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("search_by_name");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("students_table");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+
+    function search_by_address() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("search_by_address");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("students_table");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+</script>

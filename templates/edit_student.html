@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %} {{header}} {% endblock %}
+
+{% block content %}
+
+{% include 'header.html' %}
+{% include 'menu.html' %}
+{% include 'message.html' %}
+
+
+<main style="height: calc(100vh - 279px); overflow: hidden;">
+    <h2 class="w3-center w3-bottombar w3-light-grey w3-round">Add New Student || Update Operation</h2>
+    <form method="POST" action="/update_student">
+      <input type="hidden" name="roll_number" id="roll_number" value="{{ student['roll_number'] }}">
+        <div class="w3-row-padding w3-section w3-stretch">
+
+            <div class="w3-col w3-half w3-section">
+                <label class="w3-label w3-text-blue" for="full_name"><strong>Full Name</strong></label>
+                <input class="w3-input w3-border w3-round w3-light-grey w3-padding" type="text" id="full_name"
+                       name="full_name" placeholder="Enter full name" required value="{{ student['full_name'] }}">
+            </div>
+
+            <div class="w3-col w3-half w3-section">
+                <label class="w3-label w3-text-blue" for="city"><strong>City</strong></label>
+                <input class="w3-input w3-border w3-round w3-light-grey w3-padding" type="text" id="city" name="city"
+                       placeholder="Enter city" required value="{{ student['city'] }}">
+            </div>
+
+            <div class="w3-col w3-half w3-section">
+                <label class="w3-label w3-text-blue" for="address"><strong>Address</strong></label>
+                <input class="w3-input w3-border w3-round w3-light-grey w3-padding" type="text" id="address"
+                       name="address" placeholder="Enter address" required value="{{ student['address'] }}">
+            </div>
+
+            <div class="w3-col w3-half w3-section">
+                <label class="w3-label w3-text-blue" for="zip_code"><strong>Zip Code</strong></label>
+                <input class="w3-input w3-border w3-round w3-light-grey w3-padding" type="text" id="zip_code"
+                       name="zip_code" placeholder="Enter zip code" required value="{{ student['zip_code'] }}">
+            </div>
+
+            <div class="w3-col w3-half w3-section">
+                <button class="w3-button w3-blue w3-block w3-border w3-round" type="submit">
+                    <strong>Update</strong>
+                </button>
+            </div>
+
+            <div class="w3-col w3-half w3-section">
+                <button class="w3-button w3-grey w3-block w3-border w3-round" type="reset">
+                    <strong>Reset</strong>
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+</main>
+
+{% include 'footer.html' %}
+
+{% endblock %}
